@@ -44,3 +44,11 @@ impl<T: Ord> BinarySearch<T> for [T] {
         low
     }
 }
+
+#[test]
+fn test_binary_search() {
+    let v = vec![1, 1, 2, 3, 5, 8, 13];
+    assert_eq!(v.lower_bound(&8), 5);
+    assert_eq!(v.upper_bound(&8), 6);
+    assert_eq!(v.partition_point(|x| *x < 8), 5);
+}

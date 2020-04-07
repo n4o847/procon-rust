@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Download",
+      "type": "shell",
+      "command": "python tasks.py download ${input:url}",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Run",
+      "type": "shell",
+      "command": "python tasks.py run ${fileBasenameNoExtension}",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "command": "python tasks.py test ${fileBasenameNoExtension}",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Submit",
+      "type": "shell",
+      "command": "python tasks.py submit ${fileBasenameNoExtension}",
+      "problemMatcher": [],
+      "group": "build"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "url",
+      "description": "URL"
+    }
+  ]
+}

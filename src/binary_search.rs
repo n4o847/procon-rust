@@ -12,7 +12,7 @@ pub trait BinarySearch<T> {
 
 #[snippet("BinarySearch")]
 #[snippet(prefix = "use std::cmp::Ordering;")]
-impl<T: Ord> BinarySearch<T> for Vec<T> {
+impl<T: Ord> BinarySearch<T> for [T] {
     fn lower_bound(&self, x: &T) -> usize {
         let mut low = 0;
         let mut high = self.len();

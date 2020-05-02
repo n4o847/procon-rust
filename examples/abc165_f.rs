@@ -14,8 +14,8 @@ fn main() {
         g[u].push(v);
         g[v].push(u);
     }
-    let mut ans: Vec<usize> = vec![0; n];
-    let mut lis: Vec<u64> = vec![a[0]];
+    let mut ans = vec![0; n];
+    let mut lis = vec![a[0]];
     fn f(
         s: usize,
         p: usize,
@@ -26,26 +26,26 @@ fn main() {
         lis: &mut Vec<u64>,
     ) {
         ans[s] = lis.len();
-        for t in g[s].iter() {
-            if *t == p {
+        for &t in g[s].iter() {
+            if t == p {
                 continue;
             }
-            let i = lis.lower_bound(&a[*t]);
+            let i = lis.lower_bound(&a[t]);
             if i < lis.len() {
                 let prev = lis[i];
-                lis[i] = a[*t];
-                f(*t, s, n, a, g, ans, lis);
+                lis[i] = a[t];
+                f(t, s, n, a, g, ans, lis);
                 lis[i] = prev;
             } else {
-                lis.push(a[*t]);
-                f(*t, s, n, a, g, ans, lis);
+                lis.push(a[t]);
+                f(t, s, n, a, g, ans, lis);
                 lis.pop();
             }
         }
     };
     f(0, n, n, &a, &g, &mut ans, &mut lis);
-    for x in ans.iter() {
-        println!("{}", *x);
+    for &x in ans.iter() {
+        println!("{}", x);
     }
 }
 

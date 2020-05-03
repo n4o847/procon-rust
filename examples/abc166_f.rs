@@ -1,92 +1,49 @@
 use proconio::{fastout, input};
 
+use proconio::marker::Chars;
+
 #[fastout]
 fn main() {
     input! {
-        n: usize, mut a: u64, mut b: u64, mut c: u64,
-        mut q: [String; n],
+        n: usize, mut a: [u64; 3],
+        mut q: [Chars; n],
     }
-    q.push(String::from(""));
+    q.push(vec!['X', 'X']);
     let mut ans = vec![];
+    let id = |x| match x {
+        'A' => 0,
+        'B' => 1,
+        'C' => 2,
+        _ => 3,
+    };
     for i in 0..n {
-        match &q[i][..] {
-            "AB" => {
-                if a > 1 || (a, b) == (1, 0) {
-                    a -= 1;
-                    b += 1;
-                    ans.push("B");
-                } else if b > 1 || (a, b) == (0, 1) {
-                    a += 1;
-                    b -= 1;
-                    ans.push("A");
-                } else if (a, b) == (0, 0) {
-                    println!("No");
-                    return;
-                } else {
-                    if q[i + 1] == "AC" {
-                        a += 1;
-                        b -= 1;
-                        ans.push("A");
-                    } else {
-                        a -= 1;
-                        b += 1;
-                        ans.push("B");
-                    }
-                }
+        let x = id(q[i][0]);
+        let y = id(q[i][1]);
+        if a[x] > 1 || (a[x], a[y]) == (1, 0) {
+            a[x] -= 1;
+            a[y] += 1;
+            ans.push(q[i][1]);
+        } else if a[y] > 1 || (a[x], a[y]) == (0, 1) {
+            a[x] += 1;
+            a[y] -= 1;
+            ans.push(q[i][0]);
+        } else if (a[x], a[y]) == (0, 0) {
+            println!("No");
+            return;
+        } else {
+            if q[i][0] == q[i + 1][0] || q[i][0] == q[i + 1][1] {
+                a[x] += 1;
+                a[y] -= 1;
+                ans.push(q[i][0]);
+            } else {
+                a[x] -= 1;
+                a[y] += 1;
+                ans.push(q[i][1]);
             }
-            "AC" => {
-                if a > 1 || (a, c) == (1, 0) {
-                    a -= 1;
-                    c += 1;
-                    ans.push("C");
-                } else if c > 1 || (a, c) == (0, 1) {
-                    a += 1;
-                    c -= 1;
-                    ans.push("A");
-                } else if (a, c) == (0, 0) {
-                    println!("No");
-                    return;
-                } else {
-                    if q[i + 1] == "AB" {
-                        a += 1;
-                        c -= 1;
-                        ans.push("A");
-                    } else {
-                        a -= 1;
-                        c += 1;
-                        ans.push("C");
-                    }
-                }
-            }
-            "BC" => {
-                if b > 1 || (b, c) == (1, 0) {
-                    b -= 1;
-                    c += 1;
-                    ans.push("C");
-                } else if c > 1 || (b, c) == (0, 1) {
-                    b += 1;
-                    c -= 1;
-                    ans.push("B");
-                } else if (b, c) == (0, 0) {
-                    println!("No");
-                    return;
-                } else {
-                    if q[i + 1] == "AB" {
-                        b += 1;
-                        c -= 1;
-                        ans.push("B");
-                    } else {
-                        b -= 1;
-                        c += 1;
-                        ans.push("C");
-                    }
-                }
-            }
-            _ => (),
         }
     }
     println!("Yes");
-    for s in ans.iter() {
+    for &s in ans.iter() {
         println!("{}", s);
     }
 }

@@ -6,21 +6,52 @@ fn main() {
     input! {
         n: Mint, m: Mint, k: usize,
     }
-    let mut fact = vec![Mint::from(0); 200_100];
-    fact[0] = Mint::from(1);
-    for i in 1..fact.len() {
-        fact[i] = fact[i - 1] * i;
-    }
+    let mut c = Combination::new();
     let mut ans = Mint::from(0);
     for i in 0..=k {
         let cnt = m * num::pow(m - 1, usize::from(n) - 1 - i);
-        let nn: usize = (n - i).into();
-        let rr = i as usize;
-        let nr = nn + rr - 1;
-        let comb = fact[nr] / fact[rr] / fact[nr - rr];
-        ans += cnt * comb;
+        ans += cnt * c.multicomb(n - i, i.into());
     }
     println!("{}", ans);
+}
+
+use combination::*;
+mod combination {
+    use num::traits::One;
+    use std::ops::{Add, Div, Sub};
+    pub struct Combination<T>(Vec<T>);
+    impl<T> Combination<T>
+    where
+        T: One
+            + Add<Output = T>
+            + Sub<Output = T>
+            + Div<Output = T>
+            + Copy
+            + From<usize>
+            + Into<usize>,
+    {
+        #[allow(dead_code)]
+        pub fn new() -> Self {
+            Self(vec![T::one()])
+        }
+        #[allow(dead_code)]
+        pub fn fact(&mut self, x: T) -> T {
+            let a = self.0.len();
+            let b: usize = x.into();
+            for i in a..=b {
+                self.0.push(self.0[i - 1] * T::from(i));
+            }
+            self.0[b]
+        }
+        #[allow(dead_code)]
+        pub fn comb(&mut self, n: T, r: T) -> T {
+            self.fact(n) / self.fact(r) / self.fact(n - r)
+        }
+        #[allow(dead_code)]
+        pub fn multicomb(&mut self, n: T, r: T) -> T {
+            self.comb(n + r - T::from(1), r)
+        }
+    }
 }
 
 use mod_int::*;

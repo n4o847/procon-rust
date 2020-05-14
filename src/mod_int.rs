@@ -152,4 +152,9 @@ mod mod_int {
             Self(1, PhantomData::<M>)
         }
     }
+
+    #[allow(dead_code)]
+    pub fn pow<M: Modulus>(x: ModInt<M>, y: ModInt<M>) -> ModInt<M> {
+        num::pow(x, y.into())
+    }
 }

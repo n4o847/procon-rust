@@ -51,7 +51,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "cargo-snippet"
-version = "0.5.1"
+version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
@@ -326,7 +326,7 @@ dependencies = [
  "alga 0.9.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "ascii 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "bitset-fixed 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "cargo-snippet 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "cargo-snippet 0.6.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "either 1.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "fixedbitset 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "getrandom 0.1.14 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -578,7 +578,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum autocfg 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)" = "f8aac770f1885fd7e387acedd76065302551364496e46b3dd00860b2f8359b9d"
 "checksum bitmaps 2.0.0 (registry+https://github.com/rust-lang/crates.io-index)" = "81e039a80914325b37fde728ef7693c212f0ac913d5599607d7b95a9484aae0b"
 "checksum bitset-fixed 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "a8cc868e96ba5c32ffae4d42bf2940ca7fca317dcef3f19b6d7de66b6885abff"
-"checksum cargo-snippet 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "b007ec2e310dba196fa8f16251091a17584e9b628537db6c362710e178492358"
+"checksum cargo-snippet 0.6.3 (registry+https://github.com/rust-lang/crates.io-index)" = "a1c616cdae4dc9962262c49888c90b000291411fd8013af9b5f79e7897b63a3c"
 "checksum cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)" = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
 "checksum either 1.5.3 (registry+https://github.com/rust-lang/crates.io-index)" = "bb1f6b1ce1c140482ea30ddd3335fc0024ac7ee112895426e0a629a6c20adfe3"
 "checksum fixedbitset 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "37ab347416e802de484e4d03c7316c48f1ecb56574dfd4a46a80f173ce1de04d"

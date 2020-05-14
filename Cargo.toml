@@ -5,7 +5,7 @@ authors = ["n4o847"]
 edition = "2018"
 
 [dependencies]
-cargo-snippet = "0.5"
+cargo-snippet = "0.6"
 
 # AtCoder 2019年言語アップデート以降に使用できるクレート
 

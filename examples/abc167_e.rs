@@ -9,8 +9,7 @@ fn main() {
     let mut c = Combination::new();
     let mut ans = Mint::from(0);
     for i in 0..=k {
-        let cnt = m * num::pow(m - 1, usize::from(n) - 1 - i);
-        ans += cnt * c.multicomb(n - i, i.into());
+        ans += m * pow(m - 1, n - 1 - i) * c.multicomb(n - i, i.into());
     }
     println!("{}", ans);
 }
@@ -164,5 +163,9 @@ mod mod_int {
         fn one() -> Self {
             Self(1, PhantomData::<M>)
         }
+    }
+    #[allow(dead_code)]
+    pub fn pow<M: Modulus>(x: ModInt<M>, y: ModInt<M>) -> ModInt<M> {
+        num::pow(x, y.into())
     }
 }

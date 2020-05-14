@@ -24,7 +24,7 @@ mod mod_int {
 
     impl_modulus!(M998244353, 998_244_353);
 
-    pub struct ModInt<M: Modulus>(pub u64, PhantomData<M>);
+    pub struct ModInt<M: Modulus>(u64, PhantomData<M>);
 
     impl<M: Modulus> std::marker::Copy for ModInt<M> {}
 
@@ -34,11 +34,25 @@ mod mod_int {
         }
     }
 
-    impl<M: Modulus, T: num::traits::AsPrimitive<i64>> From<T> for ModInt<M> {
-        fn from(x: T) -> Self {
-            Self(x.as_().rem_euclid(M::VALUE as i64) as u64, PhantomData::<M>)
-        }
+    macro_rules! impl_primitive {
+        ($($t:ty)*) => ($(
+            impl<M: Modulus> From<$t> for ModInt<M> {
+                fn from(x: $t) -> Self {
+                    Self(
+                        (x as $t).rem_euclid(M::VALUE as $t) as u64,
+                        PhantomData::<M>,
+                    )
+                }
+            }
+            impl<M: Modulus> From<ModInt<M>> for $t {
+                fn from(x: ModInt<M>) -> $t {
+                    x.0 as $t
+                }
+            }
+        )*)
     }
+
+    impl_primitive!(usize u8 u16 u32 u64 isize i8 i16 i32 i64);
 
     impl<M: Modulus> std::str::FromStr for ModInt<M> {
         type Err = std::num::ParseIntError;

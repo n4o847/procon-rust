@@ -1,7 +1,5 @@
 use proconio::{fastout, input};
 
-use std::cmp::{max, min};
-
 fn pow(mut x: i64, mut y: i64, z: i64) -> i64 {
     let mut r = 1;
     while y > 0 {
@@ -73,25 +71,25 @@ fn main() {
         let mut l = 0;
         let mut acc = 1;
         while k > pos {
-            k -= 2;
             acc = acc * a[l] % M * a[l + 1] % M;
             l += 2;
+            k -= 2;
         }
         for i in n - k..n {
             acc = acc * a[i] % M;
         }
-        let mut ans = acc;
-        for i in 0..(neg - l) / 2 {
-            if n - k + i * 2 + 1 >= n {
+        for _ in 0..(neg - l) / 2 {
+            if n - k + 1 >= n {
                 break;
             }
-            if a[l + i * 2] * a[l + i * 2 + 1] > a[n - k + i * 2] * a[n - k + i * 2 + 1] {
+            if a[l] * a[l + 1] > a[n - k] * a[n - k + 1] {
             } else {
                 break;
             }
-            acc = acc * a[l + i * 2] % M * a[l + i * 2 + 1] % M;
-            acc = acc * inv(a[n - k + i * 2], M) % M * inv(a[n - k + i * 2 + 1], M) % M;
-            // ans = max(ans, acc);
+            acc = acc * a[l] % M * a[l + 1] % M;
+            acc = acc * inv(a[n - k], M) % M * inv(a[n - k + 1], M) % M;
+            l += 2;
+            k -= 2;
         }
         acc = (acc % M + M) % M;
         println!("{}", acc);

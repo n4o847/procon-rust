@@ -55,10 +55,6 @@ fn main() {
             }
         }
     }
-    // if h < 100 {
-    //     dbg!(&mp);
-    //     dbg!(&dp);
-    // }
     println!(
         "{}",
         dp[h - 1][w - 1] * pow(3, h as u64 * w as u64 - k as u64, M) % M

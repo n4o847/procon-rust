@@ -15,13 +15,9 @@ fn main() {
         ma = max(ma, a[i]);
         ca[i] = ma;
     }
-    let mut ma = a[0];
-    let mut mb = b[0];
+    let mut m = a[0] * b[0];
     for i in 0..n {
-        if ca[i] * b[i] > ma * mb {
-            ma = ca[i];
-            mb = b[i];
-        }
-        println!("{}", ma * mb);
+        m = max(m, ca[i] * b[i]);
+        println!("{}", m);
     }
 }

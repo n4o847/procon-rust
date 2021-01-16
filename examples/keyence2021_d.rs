@@ -5,12 +5,7 @@ fn main() {
     input! {
         n: usize,
     }
-    let mut s = vec![true; 1 << n];
     println!("{}", (1 << n) - 1);
-
-    for i in (1 << (n - 1))..((1 << n) - 1) {
-        s[i] = false;
-    }
 
     let mut h = vec![vec![vec![true, false]]];
 

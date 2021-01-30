@@ -41,32 +41,23 @@ fn main() {
             f[i][j] = d[c[j]];
         }
     }
-    // dbg!(&f);
 
     let mut ans = INF;
     for s in 0..k {
-        let mut best = vec![vec![INF; k]; 1 << k];
-        let mut prev = vec![vec![0; k]; 1 << k];
-        best[1 << s][s] = 0;
+        let mut dp = vec![vec![INF; k]; 1 << k];
+        dp[1 << s][s] = 0;
         for s in 0..(1 << k) {
             for i in 0..k {
                 if s & (1 << i) != 0 {
                     for j in 0..k {
-                        if best[s | (1 << j)][j] > best[s][i] + f[i][j] {
-                            best[s | (1 << j)][j] = best[s][i] + f[i][j];
-                            prev[s | (1 << j)][j] = i;
+                        if dp[s | (1 << j)][j] > dp[s][i] + f[i][j] {
+                            dp[s | (1 << j)][j] = dp[s][i] + f[i][j];
                         }
                     }
                 }
             }
         }
-        let t = best[(1 << k) - 1]
-            .iter()
-            .enumerate()
-            .min_by_key(|p| p.1)
-            .unwrap()
-            .0;
-        ans = min(ans, best[(1 << k) - 1][t]);
+        ans = min(ans, *dp[(1 << k) - 1].iter().min().unwrap());
     }
     println!("{}", if ans >= INF { -1 } else { ans as i64 + 1 });
 }

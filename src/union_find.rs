@@ -8,7 +8,7 @@ impl UnionFind {
   fn new(n: usize) -> Self {
     Self {
       parent: (0..n).collect(),
-      size: vec![0; n],
+      size: vec![1; n],
     }
   }
 

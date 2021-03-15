@@ -22,6 +22,7 @@ where
   }
 
   fn add(&mut self, mut i: usize, x: T) {
+    i += 1;
     while i < self.0.len() {
       self.0[i] += x;
       i += i & i.wrapping_neg();

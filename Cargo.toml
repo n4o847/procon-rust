@@ -93,7 +93,10 @@ fixedbitset = "=0.2.0"
 bitset-fixed = "=0.1.0"
 
 # 競技プログラミングの入出力サポートその1
-proconio = { version = "=0.3.6", features = ["derive"] }
+# proconio = { version = "=0.3.6", features = ["derive"] }
+
+# https://github.com/statiolake/proconio-rs/pull/18
+proconio = { version = "=0.3.7", features = ["derive"] }
 
 # 競技プログラミングの入出力サポートその2
 text_io = "=0.1.8"

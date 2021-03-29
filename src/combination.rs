@@ -1,11 +1,13 @@
 use cargo_snippet::snippet;
 
-#[snippet("combination")]
+#[snippet("use combination")]
 #[snippet(prefix = "use combination::*;")]
 mod combination {
     use num::traits::One;
     use std::ops::{Add, Div, Sub};
+
     pub struct Combination<T>(Vec<T>);
+
     impl<T> Combination<T>
     where
         T: One

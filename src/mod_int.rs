@@ -1,9 +1,13 @@
 use cargo_snippet::snippet;
 
-#[snippet("mod_int")]
+#[snippet("use mod_int")]
 #[snippet(prefix = "use mod_int::*;")]
 mod mod_int {
     use std::marker::PhantomData;
+
+    pub trait Modulus {
+        const VALUE: u64;
+    }
 
     #[macro_export]
     macro_rules! impl_modulus {
@@ -16,12 +20,7 @@ mod mod_int {
         };
     }
 
-    pub trait Modulus {
-        const VALUE: u64;
-    }
-
     impl_modulus!(M1000000007, 1_000_000_007);
-
     impl_modulus!(M998244353, 998_244_353);
 
     pub struct ModInt<M: Modulus>(u64, PhantomData<M>);
@@ -35,7 +34,7 @@ mod mod_int {
     }
 
     macro_rules! impl_primitive {
-        ($($t:ty)*) => ($(
+        ($t:ty) => {
             impl<M: Modulus> From<$t> for ModInt<M> {
                 fn from(x: $t) -> Self {
                     Self(
@@ -49,10 +48,19 @@ mod mod_int {
                     x.0 as $t
                 }
             }
-        )*)
+        };
     }
 
-    impl_primitive!(usize u8 u16 u32 u64 isize i8 i16 i32 i64);
+    impl_primitive!(usize);
+    impl_primitive!(u8);
+    impl_primitive!(u16);
+    impl_primitive!(u32);
+    impl_primitive!(u64);
+    impl_primitive!(isize);
+    impl_primitive!(i8);
+    impl_primitive!(i16);
+    impl_primitive!(i32);
+    impl_primitive!(i64);
 
     impl<M: Modulus> std::str::FromStr for ModInt<M> {
         type Err = std::num::ParseIntError;

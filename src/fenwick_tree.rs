@@ -1,15 +1,18 @@
 use cargo_snippet::snippet;
 
-#[snippet("fenwick_tree")]
+#[snippet("use fenwick_tree")]
 #[snippet(prefix = "use fenwick_tree::*;")]
 mod fenwick_tree {
+  use num::traits::Zero;
+  use std::ops::{AddAssign, Bound::*, RangeBounds, Sub};
+
   pub struct FenwickTree<T> {
     data: Vec<T>,
   }
 
   impl<T> FenwickTree<T>
   where
-    T: Copy + std::ops::AddAssign + std::ops::Sub<Output = T> + num::traits::Zero,
+    T: Copy + AddAssign + Sub<Output = T> + Zero,
   {
     #[allow(dead_code)]
     pub fn new(n: usize) -> Self {
@@ -38,8 +41,7 @@ mod fenwick_tree {
     }
 
     #[allow(dead_code)]
-    pub fn sum(&self, index: impl std::ops::RangeBounds<usize>) -> T {
-      use std::ops::Bound::*;
+    pub fn sum(&self, index: impl RangeBounds<usize>) -> T {
       let l = match index.start_bound() {
         Included(&i) => i,
         Excluded(&i) => i + 1,
@@ -52,5 +54,24 @@ mod fenwick_tree {
       };
       self.cumsum(r) - self.cumsum(l)
     }
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use fenwick_tree::*;
+
+  #[test]
+  fn practice2_a() {
+    let mut ft = FenwickTree::new(5);
+    for (i, a) in vec![1, 2, 3, 4, 5].into_iter().enumerate() {
+      ft.add(i, a);
+    }
+    assert_eq!(ft.sum(0..5), 15);
+    assert_eq!(ft.sum(2..4), 7);
+    ft.add(3, 10);
+    assert_eq!(ft.sum(0..5), 25);
+    assert_eq!(ft.sum(0..3), 6);
   }
 }

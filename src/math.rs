@@ -2,6 +2,24 @@
 // https://github.com/rust-lang-ja/ac-library-rs/blob/master/src/math.rs
 
 #[allow(dead_code)]
+fn pow_mod(mut x: u64, mut n: u64, m: u64) -> u64 {
+  let mut r = 1;
+  while n > 0 {
+    if n & 1 == 1 {
+      r = r * x % m;
+    }
+    x = x * x % m;
+    n >>= 1;
+  }
+  r
+}
+
+#[allow(dead_code)]
+fn inv_mod(x: u64, m: u64) -> u64 {
+  pow_mod(x, m - 2, m)
+}
+
+#[allow(dead_code)]
 fn crt(rm: &[(i64, i64)]) -> Option<(i64, i64)> {
   let (mut r0, mut m0) = (0, 1);
   for &(r1, mut m1) in rm.iter() {

@@ -4,28 +4,28 @@
     {
       "label": "Download",
       "type": "shell",
-      "command": "python tasks.py download ${input:url}",
+      "command": "python3 tasks.py download ${input:url}",
       "problemMatcher": [],
       "group": "build"
     },
     {
       "label": "Run",
       "type": "shell",
-      "command": "python tasks.py run ${fileBasenameNoExtension}",
+      "command": "python3 tasks.py run ${fileBasenameNoExtension}",
       "problemMatcher": [],
       "group": "build"
     },
     {
       "label": "Test",
       "type": "shell",
-      "command": "python tasks.py test ${fileBasenameNoExtension}",
+      "command": "python3 tasks.py test ${fileBasenameNoExtension}",
       "problemMatcher": [],
       "group": "build"
     },
     {
       "label": "Submit",
       "type": "shell",
-      "command": "python tasks.py submit ${fileBasenameNoExtension}",
+      "command": "python3 tasks.py submit ${fileBasenameNoExtension}",
       "problemMatcher": [],
       "group": "build"
     }
